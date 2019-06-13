@@ -25,12 +25,12 @@ router.post('/signup', passport.authenticate('local-signup', {
 }));
 
 function checkSessionLogin (req, res, next) {
-    if(req.isAuthenticated()){
-      //if user is looged in, req.isAuthenticated() will return true 
-      return res.redirect(303,"/todo");
-    } else{
-      return next();
-    }
+	if(req.isAuthenticated()){
+	//if user is looged in, req.isAuthenticated() will return true 
+		return res.redirect(303,"/todo");
+	} else{
+		return next();
+	}
 }
 
 module.exports = router;

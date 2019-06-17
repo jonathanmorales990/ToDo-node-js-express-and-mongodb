@@ -4,10 +4,10 @@ const User = require('../models/User');
 
 router.get('/', authentication, (req, res, next) => {
 	User.findOne({ _id: req.user._id }, (err, model) => {
-			if(err)
-				return res.json("Ocorreu um erro, tente novamente!").status(500);
-			if(model)
-				return res.render('todo', { title: 'ToDo', todos: model.todos });
+		if(err)
+			return res.json("Ocorreu um erro, tente novamente!").status(500);
+		if(model)
+			return res.render('todo', { title: 'ToDo', todos: model.todos });
 	});
 });
 router.post('/', authentication, (req, res, next) => {
@@ -16,13 +16,12 @@ router.post('/', authentication, (req, res, next) => {
 		{ $set: { 'todos.$.done': true } },
 		{
 			"new": true,
-		  	projection: {
-               todos: {
-               		$elemMatch: { "_id": req.body._id }, //corrigir dps
-                	$slice: -1
-               }
-            }
-		 }, (err, model) => {
+			projection: {
+				todos: {
+					$elemMatch: { "_id": ObjectId(req.body._id) }
+				}
+			}
+		}, (err, model) => {
 			if(err)
 				return res.json(err).status(500);
 			if(model)
@@ -36,12 +35,12 @@ router.put('/', authentication, (req, res, next) => {
 		{ $push: { todos: { todo: req.body.todo} } },
 		{
 			"new": true,
-		  	projection: {
-               todos: {
-                  $slice: -1,
-               }
-            }
-		 }, (err, model) => {
+			projection: {
+               			todos: {
+                  			$slice: -1,
+               			}
+            		}
+		}, (err, model) => {
 			if(err){
 				return res.json(err).status(500);
 			}
@@ -52,9 +51,9 @@ router.put('/', authentication, (req, res, next) => {
 
 function authentication (req, res, next) {
     if(!req.isAuthenticated()){
-      return res.redirect(302,"/");
+	return res.redirect(302,"/");
     } else{
-      return next();
+	return next();
     }
 }
 

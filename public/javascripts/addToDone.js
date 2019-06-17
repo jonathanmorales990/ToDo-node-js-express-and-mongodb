@@ -11,10 +11,10 @@ $(function() {
 		}
 
 		$.ajax({
-		    type: 'POST',
-		    url: '/todo',
-		    contentType: 'application/json',
-		    data: JSON.stringify(data),
+			type: 'POST',
+			url: '/todo',
+			contentType: 'application/json',
+			data: JSON.stringify(data),
 		}).done(function (dataServer) {
 			console.log(dataServer)
 		}).fail(function (dataServer) {
@@ -22,8 +22,8 @@ $(function() {
 		});
 	}
 	function doneTodo(doneItem, id){
-        var done = doneItem;
-        var markup = '<li id="'+ id +'">'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
-        $('#done-items').append(markup);
-    }
+		var done = doneItem;
+		var markup = '<li id="'+ id +'">'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
+		$('#done-items').append(markup);
+    	}
 });

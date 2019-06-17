@@ -1,8 +1,10 @@
-module.exports = function(mongoose) {
+module.exports = (mongoose) => {
 
 	const configDB = require('./database.js');
 
 	const db = mongoose.connection;
+
+	mongoose.set('useFindAndModify', false);
 
 	db.on('connecting', () => {
 		console.log('connecting to MongoDB...');

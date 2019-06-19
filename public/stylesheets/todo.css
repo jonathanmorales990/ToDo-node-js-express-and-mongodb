@@ -50,3 +50,11 @@ li.ui-state-default:last-child {
 .checkbox > label {
     padding-left: 2px;
 }
+
+#done-items > li {
+    margin-right: 2px;
+}
+.remove-item {
+    position: relative;
+    top: -3px;
+}

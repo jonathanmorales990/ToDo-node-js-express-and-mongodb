@@ -16,14 +16,17 @@ $(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(data),
 		}).done(function (dataServer) {
-			console.log(dataServer)
+
+			$(element).closest('li').remove();
+			doneTodo(dataServer[0].todo, dataServer[0]._id);
+
 		}).fail(function (dataServer) {
 			console.log(dataServer);
 		});
 	}
 	function doneTodo(doneItem, id){
 		var done = doneItem;
-		var markup = '<li id="'+ id +'">'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
+		var markup = '<li>'+ done +'<button id="'+ id +'" class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
 		$('#done-items').append(markup);
     	}
 });

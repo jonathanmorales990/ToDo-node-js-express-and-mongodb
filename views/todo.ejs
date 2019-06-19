@@ -12,6 +12,7 @@
         <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/javascripts/addTodo.js"></script>
         <script src="/javascripts/addToDone.js"></script>
+        <script src="/javascripts/removeTodo.js"></script>
 
     </head>
     <body>
@@ -48,8 +49,12 @@
                 <div class="col-md-6">
                     <div class="todolist">
                      <h1>Already Done</h1>
-                        <ul id="done-items" class="list-unstyled">
-                            <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                        <ul id="done-items" class="list-unstyled" style="overflow-y:scroll; height: 375px;">
+                            <% for (let i=0; i < todos.length; i++) { %>
+                                <% if (todos[i].done == true) { %>
+                                     <li><%= todos[i].todo %> <button id="<%= todos[i]._id %>" class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                                <% } %>
+                            <% } %>
                         </ul>
                     </div>
                 </div>

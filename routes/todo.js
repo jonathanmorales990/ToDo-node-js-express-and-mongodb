@@ -10,6 +10,18 @@ router.get('/', authentication, (req, res, next) => {
 			return res.render('todo', { title: 'ToDo', todos: model.todos });
 	});
 });
+
+router.delete('/', authentication, (req, res, next) => {
+	User.findOneAndUpdate (
+		{ _id: req.user._id, 'todos._id': req.body._id  },
+		{ $pull: 'todos' }, (err, model) => {
+			if(err)
+				return res.json(err).status(500);
+			if(model)
+				return res.json('ok').status(200);
+	});
+});
+
 router.post('/', authentication, (req, res, next) => {
 	User.findOneAndUpdate (
 		{ _id: req.user._id, 'todos._id': req.body._id  },
@@ -18,7 +30,7 @@ router.post('/', authentication, (req, res, next) => {
 			"new": true,
 			projection: {
 				todos: {
-					$elemMatch: { "_id": ObjectId(req.body._id) }
+					$elemMatch: { "_id": req.body._id }
 				}
 			}
 		}, (err, model) => {
@@ -36,10 +48,10 @@ router.put('/', authentication, (req, res, next) => {
 		{
 			"new": true,
 			projection: {
-               			todos: {
-                  			$slice: -1,
-               			}
-            		}
+				todos: {
+					$slice: -1,
+				}
+			}
 		}, (err, model) => {
 			if(err){
 				return res.json(err).status(500);
@@ -51,9 +63,9 @@ router.put('/', authentication, (req, res, next) => {
 
 function authentication (req, res, next) {
     if(!req.isAuthenticated()){
-	return res.redirect(302,"/");
+		return res.redirect(302,"/");
     } else{
-	return next();
+		return next();
     }
 }
 

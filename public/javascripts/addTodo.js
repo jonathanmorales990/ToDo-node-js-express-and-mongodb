@@ -30,7 +30,7 @@ $(function() {
 	}
 
 	function createTodo(text, id){
-		let markup = '<li id="'+ id +'" class="ui-state-default"><div class="checkbox"><label> <button class="item btn btn-default btn-xs pull-left"><span class="glyphicon glyphicon-ok"></span></button><span style="margin-left: 5px; line-height: 1.7;">'+ text +'</span></label></div></li>';
+		let markup = '<li class="ui-state-default"><div class="checkbox"><label> <button id="'+ id +'" class="item btn btn-default btn-xs pull-left add-as-done"><span class="glyphicon glyphicon-ok"></span></button><span style="margin-left: 5px; line-height: 1.7;">'+ text +'</span></label></div></li>';
 		$('#sortable').append(markup);
 		$('.add-todo').val('');
     	}

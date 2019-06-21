@@ -45,9 +45,9 @@ $(function() {
 		var markup = '<li>'+ done +'<button id="'+ id +'" class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
 		$('#done-items').append(markup);
 		let count = parseInt($('.count-todos').text());
-    	if (count > 0) {
-    		count -= 1;
-    	}
-    	$('.count-todos').text(count);
-    }
+		if (count > 0) {
+			count -= 1;
+		}
+		$('.count-todos').text(count);
+	}
 });

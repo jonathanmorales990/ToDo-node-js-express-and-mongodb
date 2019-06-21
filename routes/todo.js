@@ -14,7 +14,7 @@ router.get('/', authentication, (req, res, next) => {
 router.delete('/', authentication, (req, res, next) => {
 	User.findOneAndUpdate (
 		{ _id: req.user._id, 'todos._id': req.body._id  },
-		{ $pull: 'todos' }, (err, model) => {
+		{ $pull: {'todos' : {_id: req.body._id } } }, (err, model) => {
 			if(err)
 				return res.json(err).status(500);
 			if(model)
@@ -22,7 +22,7 @@ router.delete('/', authentication, (req, res, next) => {
 	});
 });
 
-router.post('/', authentication, (req, res, next) => {
+router.put('/', authentication, (req, res, next) => {
 	User.findOneAndUpdate (
 		{ _id: req.user._id, 'todos._id': req.body._id  },
 		{ $set: { 'todos.$.done': true } },
@@ -41,7 +41,7 @@ router.post('/', authentication, (req, res, next) => {
 	});
 });
 
-router.put('/', authentication, (req, res, next) => {
+router.post('/', authentication, (req, res, next) => {
 	User.findOneAndUpdate (
 		{ _id: req.user._id },
 		{ $push: { todos: { todo: req.body.todo} } },

@@ -6,6 +6,18 @@ body {
     padding:20px 20px 10px 20px;
     margin-top:30px;
 }
+.add-todo-loading {
+    width: 25px;
+    top: 5px;
+    position: relative;
+    display: none;
+}
+.add-as-done-loading {
+    width: 11px;
+}
+.remove-todo-loading {
+    width: 11px;
+}
 .todolist h1 {
     margin:0;
     padding-bottom:20px;

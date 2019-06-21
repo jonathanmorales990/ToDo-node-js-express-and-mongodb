@@ -20,14 +20,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="todolist not-done">
-                     <h1>Todos</h1>
-                        <input type="text" class="form-control add-todo todo-input" placeholder="Add todo">
-                            <button id="checkAll" class="btn btn-success">Marcar todas como feitas </button>
+                     <h1>Tarefas</h1>
+                        <input type="text" class="form-control add-todo todo-input" placeholder="Adicionar">
                             <button id="add-new-todo" class="btn btn-success">Adicionar</button>
+                            <img class="add-todo-loading" src="/images/loading.gif">
+                            <!--<img class="add-as-done-loading" src="/images/loading.gif"> -->
+                            <!--<img class="remove-todo-loading" src="/images/loading.gif"> -->
                             <hr>
                             <ul id="sortable" class="list-unstyled" style="overflow-y:scroll; height: 230px;">
+                                <% var count = 0; %>
                                 <% for (let i=0; i < todos.length; i++) { %>
                                     <% if (todos[i].done == false) { %>
+                                        <% count += 1; %>
                                         <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
@@ -42,13 +46,13 @@
                                 <% } %>
                             </ul>
                             <div class="todo-footer">
-                                <strong><span class="count-todos"> 0 </span></strong> Items Left
+                                <strong><span class="count-todos"> <%= count %> </span></strong> Itens restantes
                             </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="todolist">
-                     <h1>Already Done</h1>
+                     <h1>Já Feita</h1>
                         <ul id="done-items" class="list-unstyled" style="overflow-y:scroll; height: 375px;">
                             <% for (let i=0; i < todos.length; i++) { %>
                                 <% if (todos[i].done == true) { %>

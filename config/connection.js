@@ -28,7 +28,7 @@ module.exports = (mongoose) => {
 	  	mongoose.connect(configDB.url, {server:{auto_reconnect:true}});
 	});
 
-	mongoose.connect(configDB.url, {server:{auto_reconnect:true}});
+	mongoose.connect(configDB.url, { useNewUrlParser: true, server:{auto_reconnect:true}});
 
 	process.on('SIGINT',(params) => {
 	  console.log('Tchau!');

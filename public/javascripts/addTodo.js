@@ -48,9 +48,9 @@ $(function() {
 		let markup = '<li class="ui-state-default"><div class="checkbox"><label> <button id="'+ id +'" class="item btn btn-default btn-xs pull-left add-as-done"><span class="glyphicon glyphicon-ok"></span></button><span style="margin-left: 5px; line-height: 1.7;">'+ text +'</span></label></div></li>';
 		$('#sortable').append(markup);
 		$('.add-todo').val('');
-    	let count = parseInt($('.count-todos').text());
-    	count += 1;
-    	$('.count-todos').text(count);
-    }
+    		let count = parseInt($('.count-todos').text());
+    		count += 1;
+    		$('.count-todos').text(count);
+	}
 
 });

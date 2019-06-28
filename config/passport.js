@@ -21,17 +21,16 @@ module.exports = (passport) => {
         passReqToCallback : true
     },(req, email, password, done) => {
         process.nextTick(() => {
-            User.findOne({ 'email' :  email }, function(err, user) {
-                if (err){
+            User.findOne({ 'email' :  email }, (err, user) => {
+                if (err) {
                     return done(err);
                 }
-                if (!user){
+                if (!user) {
                     return done(null, false, req.flash('loginMessage', 'Usuário não encontrado'));
                 }
-                if (!user.validPassword(password)){
+                if (!user.validPassword(password)) {
                     return done(null, false, req.flash('loginMessage', 'Oops! Senha inválida'));
-                }
-                else{
+                } else {
                     return done(null, user);
                 }
             });
@@ -69,13 +68,14 @@ module.exports = (passport) => {
                 }
 
                 else {
+
                     let newUser = new User();
 
-                    newUser.email= email;
+                    newUser.email = email;
                     newUser.password = newUser.generateHash(password);
                     newUser.nome = req.body.nome;
                     newUser.sobrenome = req.body.sobrenome;
-                    newUser.nomecompleto = req.body.nome + " " + req.body.sobrenome;
+
                     newUser.save(function(err) {
                         if (err)
                             throw err;
@@ -83,9 +83,7 @@ module.exports = (passport) => {
                         return done(null, newUser, req.flash('signupMessageSucess', 'Cadastrado com sucesso!'));
                     });
                 }
-
             });
         });
-
     }));
 };

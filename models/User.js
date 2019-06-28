@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const bcrypt   = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 const Todo = require('./Todo');
 
 const userSchema = mongoose.Schema({
-	nome: String,
-	sobrenome: String,
-	email: String,
-	password: String,
+	nome: { type: String, required: true },
+	sobrenome: { type: String, required: true },
+	email: { type: String, required: true, unique: true },
+	password: { type: String, required: true },
 	todos: [Todo]
 },{
     	collection: 'usuarios'

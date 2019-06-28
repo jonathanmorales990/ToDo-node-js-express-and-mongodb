@@ -7,11 +7,12 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 mongoose.Promise = require('bluebird');
-
+const compression = require('compression');
+const helmet = require('helmet');
 const loginSignupRouter = require('./routes/loginSignup');
 const todoRouter = require('./routes/todo');
 
-let session = require("express-session")({
+const session = require("express-session")({
     secret: 'todo!@$%()$#)@',
     resave: true,
     saveUninitialized: true
@@ -19,6 +20,8 @@ let session = require("express-session")({
 
 const app = express();
 
+app.use(helmet());
+app.use(compression());
 app.use(flash());
 app.use(session);
 app.use(passport.initialize());
